@@ -3,6 +3,7 @@ extends KinematicBody2D
 export var vertical_speed = 400
 export var horizontal_speed = 600
 export var aceleration = 1
+export var friction = 0.1
 
 export var speed_variation = 50
 export var speed_rotation = 10
@@ -24,11 +25,13 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_page_down"):
 		adjust_speed(-1)
 
-	var collision = move_and_collide(velocity * delta)
+	velocity = move_and_slide(velocity)
 
 
 func move():
-	velocity.x = lerp(velocity.x, direction.x * horizontal_speed, aceleration)
+	velocity.x = lerp(
+		velocity.x, direction.x * horizontal_speed, aceleration if direction.x != 0 else friction
+	)
 	velocity.y = lerp(velocity.y, -1 * vertical_speed, aceleration)
 
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/calle_normal.png-fd8e1e664c36fd0e3537d73d1988bd0d.stex"
+path="res://.import/frame0000.png-bd6c9c94d124e8b64adc8d1989495f67.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/base/calle_normal.png"
-dest_files=[ "res://.import/calle_normal.png-fd8e1e664c36fd0e3537d73d1988bd0d.stex" ]
+source_file="res://characters/player/animations/running/frame0000.png"
+dest_files=[ "res://.import/frame0000.png-bd6c9c94d124e8b64adc8d1989495f67.stex" ]
 
 [params]
 
