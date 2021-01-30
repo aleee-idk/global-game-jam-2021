@@ -1,0 +1,6 @@
+# Godot ignore 
+
+.import/
+*.translation
+export_presets.cfg
+.mono/
