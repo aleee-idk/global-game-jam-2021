@@ -41,6 +41,16 @@ func _enter_tree():
 		new_obstacle.position = obstacle_position
 		$Spawns.call_deferred("add_child", new_obstacle)
 
+	var exits = get_node_or_null("Exits")
+	if exits:
+		for exit in exits.get_children():
+			exit.connect("body_entered", get_node("/root/BaseLevel"), "_on_exit_entered", [exit])
+
 
 func _on_InScreen_screen_exited():
 	queue_free()
+
+
+func _on_Victory_body_entered(body):
+	PlayerStats.dead = true
+	get_tree().quit()

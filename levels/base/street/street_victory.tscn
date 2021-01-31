@@ -1,8 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://levels/base/street/street.gd" type="Script" id=1]
 [ext_resource path="res://levels/base/street/street_normal.png" type="Texture" id=2]
 [ext_resource path="res://levels/base/elements/obstacle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://levels/base/street/victory/frame0000.png" type="Texture" id=4]
+[ext_resource path="res://levels/base/street/victory/frame0003.png" type="Texture" id=5]
+[ext_resource path="res://levels/base/street/victory/frame0007.png" type="Texture" id=6]
+[ext_resource path="res://levels/base/street/victory/frame0004.png" type="Texture" id=7]
+[ext_resource path="res://levels/base/street/victory/frame0005.png" type="Texture" id=8]
+[ext_resource path="res://levels/base/street/victory/frame0001.png" type="Texture" id=9]
+[ext_resource path="res://levels/base/street/victory/frame0002.png" type="Texture" id=10]
+[ext_resource path="res://levels/base/street/victory/frame0006.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 220, 720 )
@@ -15,6 +23,17 @@ extents = Vector2( 840, 240 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 840, 720 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 174.652, 247.484 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
 
 [node name="Street" type="StaticBody2D" groups=[
 "normal_street",
@@ -71,24 +90,24 @@ position = Vector2( -120, 240 )
 [node name="Obstacle4" parent="Barricade" instance=ExtResource( 3 )]
 position = Vector2( 180, 120 )
 
-[node name="Obstacle7" parent="Barricade" instance=ExtResource( 3 )]
-position = Vector2( 60, -40 )
-
-[node name="Obstacle8" parent="Barricade" instance=ExtResource( 3 )]
-position = Vector2( -260, -140 )
-
-[node name="Obstacle9" parent="Barricade" instance=ExtResource( 3 )]
-position = Vector2( -600, -140 )
-
-[node name="Obstacle10" parent="Barricade" instance=ExtResource( 3 )]
-position = Vector2( 560, -160 )
-
-[node name="Obstacle11" parent="Barricade" instance=ExtResource( 3 )]
-position = Vector2( 240, -240 )
-
 [node name="Obstacle5" parent="Barricade" instance=ExtResource( 3 )]
 position = Vector2( 460, 240 )
 
 [node name="Obstacle6" parent="Barricade" instance=ExtResource( 3 )]
 position = Vector2( 660, 100 )
+
+[node name="Victory" type="Area2D" parent="."]
+position = Vector2( 596.326, -379.716 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Victory"]
+shape = SubResource( 5 )
+
+[node name="Victory" type="AnimatedSprite" parent="Victory"]
+frames = SubResource( 6 )
+frame = 6
+playing = true
 [connection signal="screen_exited" from="InScreen" to="." method="_on_InScreen_screen_exited"]
+[connection signal="body_entered" from="Victory" to="." method="_on_Victory_body_entered"]

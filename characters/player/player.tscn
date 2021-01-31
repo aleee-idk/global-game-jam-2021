@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://characters/player/animations/running/frame0006.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://characters/player/player_state_machine/rotating_state.gd" type="Script" id=11]
 [ext_resource path="res://characters/player/guide/guide_animation.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://audio/Sonidos Detalles/Sniff 2.wav" type="AudioStream" id=13]
+[ext_resource path="res://audio/Sonidos Detalles/Rastro correcto.wav" type="AudioStream" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -35,7 +36,7 @@ script = ExtResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "running"
-frame = 6
+frame = 5
 playing = true
 
 [node name="Guide" type="AnimatedSprite" parent="."]
@@ -106,4 +107,8 @@ rect = Rect2( -60, -140, 120, 280 )
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
+
+[node name="CorrectExit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+volume_db = 12.117
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

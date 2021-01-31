@@ -8,7 +8,6 @@ export var speed_rotation = 90
 
 var velocity = Vector2()
 var direction = Vector2()
-var dead = false
 
 onready var states = $StateMachine
 onready var overlay = $UI/Control/ColorRect
@@ -70,28 +69,35 @@ func adjust_rotation(value):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	if dead:
+	if PlayerStats.dead:
 		return
 
 	var origin = level.get_node("Map").get_child(0).get_node("Position2D")
 	var exit_direction = global_position.direction_to(origin.global_position).sign()
+	print(exit_direction)
 	if exit_direction.y > 0:
 		exit_direction = "Top"
 	elif exit_direction.x > 0:
-		exit_direction = "Right"
-	else:
 		exit_direction = "Left"
+	else:
+		exit_direction = "Right"
 
+	print(exit_direction)
 	if level.guide_direction["exit"] != exit_direction:
 		PlayerStats.incorrect_exit = true
+	else:
+		$CorrectExit.play()
+		PlayerStats.number_of_screens += 1
+
 	tween.interpolate_property(
 		overlay, "color", overlay.color, Color(0, 0, 0, 1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	tween.start()
 	yield(tween, "tween_completed")
+
 	get_tree().reload_current_scene()
 
 
 func game_over():
-	dead = true
+	PlayerStats.dead = true
 	get_tree().quit()
