@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://characters/player/animations/running/frame0006.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://characters/player/animations/running/frame0001.png" type="Texture" id=10]
 [ext_resource path="res://characters/player/player_state_machine/rotating_state.gd" type="Script" id=11]
 [ext_resource path="res://characters/player/guide/guide_animation.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://audio/Sonidos Detalles/Sniff 2.wav" type="AudioStream" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -34,6 +35,7 @@ script = ExtResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "running"
+frame = 6
 playing = true
 
 [node name="Guide" type="AnimatedSprite" parent="."]
@@ -64,7 +66,6 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
@@ -82,6 +83,9 @@ margin_bottom = 33.0
 grow_horizontal = 2
 text = "speed"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
@@ -99,4 +103,7 @@ editor_draw_drag_margin = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -60, -140, 120, 280 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

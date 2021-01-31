@@ -8,6 +8,7 @@ export var speed_rotation = 90
 
 var velocity = Vector2()
 var direction = Vector2()
+var dead = false
 
 onready var states = $StateMachine
 onready var overlay = $UI/Control/ColorRect
@@ -36,6 +37,7 @@ func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		$Guide.play(level.guide_direction["animation"])
 		adjust_speed(-1)
+		$Sound.play()
 		yield($Guide, "animation_finished")
 		$Guide.play("none")
 
@@ -68,6 +70,9 @@ func adjust_rotation(value):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
+	if dead:
+		return
+
 	var origin = level.get_node("Map").get_child(0).get_node("Position2D")
 	var exit_direction = global_position.direction_to(origin.global_position).sign()
 	if exit_direction.y > 0:
@@ -88,4 +93,5 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func game_over():
+	dead = true
 	get_tree().quit()
