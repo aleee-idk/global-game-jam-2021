@@ -2,7 +2,7 @@ extends "res://characters/state_machine/state_machine.gd"
 
 
 func _ready():
-	states = {"running": $Running}
+	states = {"running": $Running, "rotating": $Rotating}
 
 	.set_active(true)
 	change_state("running")

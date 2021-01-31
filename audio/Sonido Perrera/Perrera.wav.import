@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Perrera.wav-078cd7e39475ad64e8f008e3bf6a56ef.sample"
+
+[deps]
+
+source_file="res://audio/Sonido Perrera/Perrera.wav"
+dest_files=[ "res://.import/Perrera.wav-078cd7e39475ad64e8f008e3bf6a56ef.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://characters/player/animations/running/frame0006.png" type="Texture" id=2]
@@ -10,8 +10,10 @@
 [ext_resource path="res://characters/player/animations/running/frame0002.png" type="Texture" id=8]
 [ext_resource path="res://characters/player/animations/running/frame0000.png" type="Texture" id=9]
 [ext_resource path="res://characters/player/animations/running/frame0001.png" type="Texture" id=10]
+[ext_resource path="res://characters/player/player_state_machine/rotating_state.gd" type="Script" id=11]
+[ext_resource path="res://characters/player/guide/guide_animation.tres" type="SpriteFrames" id=12]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 2 ) ],
 "loop": true,
@@ -19,28 +21,29 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 55.3859
 height = 179.01
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-position = Vector2( 1278.16, 242.178 )
+z_index = 10
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
-horizontal_speed = 800
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "running"
-frame = 2
+playing = true
+
+[node name="Guide" type="AnimatedSprite" parent="."]
+position = Vector2( -1.25989, -354.952 )
+frames = ExtResource( 12 )
+animation = "none"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -48,15 +51,52 @@ script = ExtResource( 4 )
 [node name="Running" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
 
+[node name="Rotating" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Control" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speed" type="Label" parent="UI/Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 19.0
+margin_right = 20.0
+margin_bottom = 33.0
+grow_horizontal = 2
+text = "speed"
+align = 1
+
 [node name="Camera" type="Camera2D" parent="."]
-rotating = true
 current = true
 zoom = Vector2( 1.75, 1.75 )
-limit_left = 0
-limit_right = 2560
+limit_left = -1280
+limit_right = 1280
+limit_bottom = 720
+limit_smoothed = true
 offset_v = -1.0
 drag_margin_top = 1.0
 drag_margin_bottom = 1.0
 editor_draw_drag_margin = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -60, -140, 120, 280 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

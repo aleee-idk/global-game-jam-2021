@@ -19,6 +19,10 @@ config/name="Ggj- 2021"
 run/main_scene="res://levels/base/base_level.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerStats="*res://characters/player/player_stats.gd"
+
 [display]
 
 window/size/width=1366

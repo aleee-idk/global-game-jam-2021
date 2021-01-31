@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/base/street/street.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/base/base_level.gd" type="Script" id=3]
+[ext_resource path="res://characters/truck/truck.tscn" type="PackedScene" id=4]
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource( 3 )
@@ -11,8 +12,10 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1260, 1260 )
-speed_rotation = 1
+position = Vector2( 0, 580 )
+
+[node name="Truck" parent="." instance=ExtResource( 4 )]
+position = Vector2( 7.5509, 1298.77 )
 
 [node name="Map" type="Node2D" parent="."]
 __meta__ = {
