@@ -100,4 +100,4 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func game_over():
 	PlayerStats.dead = true
-	get_tree().quit()
+	get_tree().change_scene("res://ui/defeat/defeat.tscn")

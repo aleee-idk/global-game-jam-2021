@@ -53,4 +53,4 @@ func _on_InScreen_screen_exited():
 
 func _on_Victory_body_entered(body):
 	PlayerStats.dead = true
-	get_tree().quit()
+	get_tree().change_scene("res://ui/victory/victory.tscn")

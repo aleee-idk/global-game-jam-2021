@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Ggj- 2021"
-run/main_scene="res://levels/base/base_level.tscn"
+run/main_scene="res://ui/main_screen/main_screen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -28,7 +28,6 @@ Audio="*res://audio/audio.tscn"
 
 window/size/width=1366
 window/size/height=768
-window/size/fullscreen=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
